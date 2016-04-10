@@ -1,0 +1,16 @@
+﻿{
+    "$schema": "http://json-schema.org/schemas/2014-11-01/apiapp.json#",
+    "id": "GD.Connectors.XeroAccounting",
+    "namespace": "granddomain.onmicrosoft.com",
+    "gateway": "2015-01-14",
+    "version": "1.0.0",
+    "title": "GD Connector for Xero Accounting",
+    "summary": "A proxy for Xero's Accounting API to Logic Apps",
+    "author": "Grand Domain",
+    "endpoints": {
+        "apiDefinition": "/swagger/docs/v1",
+        "status": null
+    },
+    "copyright": "Copyright 2015 Grand Domain",
+    "brandColor": "#ae4924"
+}
