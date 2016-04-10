@@ -213,3 +213,6 @@ ModelManifest.xml
 
 # T4 generated
 Xero/Controllers/Controller.cs
+
+# Local certificates
+Certificates/
