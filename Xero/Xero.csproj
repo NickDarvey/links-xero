@@ -151,7 +151,7 @@
     <Compile Include="Services\ApiService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="apiapp.json" />h
+    <Content Include="apiapp.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
