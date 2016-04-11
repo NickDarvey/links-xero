@@ -11,10 +11,10 @@
     "branch": {
       "type": "string"
     },
-    "svcPlanName": {
+    "servicePlanName": {
       "type": "string"
     },
-    "sku": {
+    "tier": {
       "type": "string",
       "defaultValue": "Standard",
       "allowedValues": [
@@ -35,7 +35,7 @@
         "description": "Describes plan's pricing tier and instance size. Check details at https://azure.microsoft.com/en-us/pricing/details/app-service/"
       }
     },
-    "skuCapacity": {
+    "scale": {
       "type": "int",
       "defaultValue": 1,
       "minValue": 1,
@@ -53,41 +53,41 @@
     "xeroPkcs12Password": {
       "type": "securestring"
     },
-    "xeroClientId": {
+    "xeroConsumerKey": {
       "type": "securestring"
     },
-    "xeroClientSecret": {
+    "xeroConsumerSecret": {
       "type": "securestring"
     }
   },
   "resources": [
     {
       "apiVersion": "2015-08-01",
-      "name": "[parameters('svcPlanName')]",
+      "name": "[parameters('servicePlanName')]",
       "type": "Microsoft.Web/serverfarms",
       "location": "[resourceGroup().location]",
       "tags": {
         "displayName": "HostingPlan"
       },
-      "sku": {
-        "name": "[parameters('sku')]",
-        "capacity": "[parameters('skuCapacity')]"
+      "tier": {
+        "name": "[parameters('tier')]",
+        "capacity": "[parameters('scale')]"
       },
       "properties": {
-        "name": "[parameters('svcPlanName')]"
+        "name": "[parameters('servicePlanName')]"
       }
     },
     {
       "apiVersion": "2015-08-01",
       "dependsOn": [
-        "[concat('Microsoft.Web/serverfarms/', parameters('svcPlanName'))]"
+        "[concat('Microsoft.Web/serverfarms/', parameters('servicePlanName'))]"
       ],
       "kind": "api",
       "location": "[resourceGroup().location]",
       "name": "[parameters('siteName')]",
       "properties": {
         "name": "[parameters('siteName')]",
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('svcPlanName'))]"
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('servicePlanName'))]"
       },
       "resources": [
         {
@@ -132,13 +132,13 @@
             "xero:uri": "[parameters('xeroApiEndpoint')]",
             "xero:pkcs12Content": "[parameters('xeroPkcs12Content')]",
             "xero:pkcs12Password": "[parameters('xeroPkcs12Password')]",
-            "xero:clientId": "[parameters('xeroClientId')]",
-            "xero:clientSecret": "[parameters('xeroClientSecret')]"
+            "xero:clientId": "[parameters('xeroConsumerKey')]",
+            "xero:clientSecret": "[parameters('xeroConsumerSecret')]"
           }
         }
       ],
       "tags": {
-        "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('svcPlanName'))]": "Resource",
+        "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('servicePlanName'))]": "Resource",
         "displayName": "Website"
       },
       "type": "Microsoft.Web/sites"
