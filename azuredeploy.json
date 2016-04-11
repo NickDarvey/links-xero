@@ -5,7 +5,7 @@
     "siteName": {
       "type": "string"
     },
-    "repo": {
+    "repoURL": {
       "type": "string"
     },
     "branch": {
@@ -97,7 +97,7 @@
           ],
           "name": "web",
           "properties": {
-            "RepoUrl": "[parameters('repo')]",
+            "RepoUrl": "[parameters('repoURL')]",
             "branch": "[parameters('branch')]",
             "IsManualIntegration": true
           },
