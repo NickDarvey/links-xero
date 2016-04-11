@@ -19,16 +19,14 @@ namespace GD.Links.Xero.Services
 
         public AuthorizationService()
         {
-            var store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
-            store.Open(OpenFlags.ReadOnly);
-            _certificate = ConfigurationManager.AppSettings.Get("xero:thumbprint").ToMaybe()
-                .Select(t =>
-                {
-                    return store.Certificates.Find(X509FindType.FindByThumbprint, t, false);
-                })
-                .Select(c => c[0])
-                .OrElse(() => new CryptographicException($"There were no certificates matching the thumbprint found in '{store.Name}'"));
-            store.Close();
+            _certificate = ConfigurationManager.AppSettings.Get("xero:pkcs12Content").ToMaybe()
+                    .Select(c =>
+                    {
+                        return ConfigurationManager.AppSettings.Get("xero:pkcs12Password").ToMaybe()
+                           .Select(p => new X509Certificate2(Convert.FromBase64String(c), p))
+                           .OrElse(() => new CryptographicException("There was no PKCS12 password in app settings"));
+                    })
+                    .OrElse(() => new CryptographicException("There was no PKCS12 content in app settings"));
         }
 
         public string GetSignature(IConsumer consumer, IUser user, Uri uri, string verb, IConsumer consumer1)

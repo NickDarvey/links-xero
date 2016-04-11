@@ -47,13 +47,16 @@
       "type": "string",
       "defaultValue": "https://api.xero.com/api.xro/2.0/"
     },
-    "xeroCertificateThumbprint": {
-      "type": "string"
+    "xeroPkcs12Password": {
+      "type": "securestring"
     },
     "xeroClientId": {
       "type": "securestring"
     },
     "xeroClientSecret": {
+      "type": "securestring"
+    },
+    "xeroPkcs12Content": {
       "type": "securestring"
     }
   },
