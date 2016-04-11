@@ -125,9 +125,9 @@
   <ItemGroup>
     <Content Include="Controllers\Controller.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Controller.txt</LastGenOutput>
+      <LastGenOutput>Controller.cs</LastGenOutput>
     </Content>
-    <Content Include="Controllers\Controller.txt">
+    <Content Include="Controllers\Controller.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Controller.tt</DependentUpon>
@@ -151,7 +151,7 @@
     <Compile Include="Services\ApiService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="apiapp.json" />
+    <Content Include="apiapp.json" />h
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
