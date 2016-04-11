@@ -69,7 +69,7 @@
       "tags": {
         "displayName": "HostingPlan"
       },
-      "tier": {
+      "sku": {
         "name": "[parameters('tier')]",
         "capacity": "[parameters('scale')]"
       },
