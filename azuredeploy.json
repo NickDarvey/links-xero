@@ -47,6 +47,9 @@
       "type": "string",
       "defaultValue": "https://api.xero.com/api.xro/2.0/"
     },
+    "xeroPkcs12Content": {
+      "type": "securestring"
+    },
     "xeroPkcs12Password": {
       "type": "securestring"
     },
@@ -54,9 +57,6 @@
       "type": "securestring"
     },
     "xeroClientSecret": {
-      "type": "securestring"
-    },
-    "xeroPkcs12Content": {
       "type": "securestring"
     }
   },
@@ -130,7 +130,8 @@
           ],
           "properties": {
             "xero:uri": "[parameters('xeroApiEndpoint')]",
-            "xero:thumbprint": "[parameters('xeroCertificateThumbprint')]",
+            "xero:pkcs12Content": "[parameters('xeroPkcs12Content')]",
+            "xero:pkcs12Password": "[parameters('xeroPkcs12Password')]",
             "xero:clientId": "[parameters('xeroClientId')]",
             "xero:clientSecret": "[parameters('xeroClientSecret')]"
           }
