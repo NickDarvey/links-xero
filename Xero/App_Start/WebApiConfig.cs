@@ -1,11 +1,7 @@
-﻿using Microsoft.Practices.Unity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using Xero.Api.Infrastructure.Interfaces;
-using GD.Links.Xero.Controllers;
-using GD.Links.Xero.Services;
 
 namespace GD.Links.Xero
 {
@@ -13,7 +9,7 @@ namespace GD.Links.Xero
     {
         public static void Register(HttpConfiguration config)
         {
-
+            // Web API configuration and services
 
             // Web API routes
             config.MapHttpAttributeRoutes();
