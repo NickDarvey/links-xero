@@ -1,8 +1,11 @@
-﻿using System.Web.Http;
+﻿using System.Globalization;
+using System.Linq;
+using System.Web.Http;
+using System.Web.Http.Description;
 using Swashbuckle.Application;
+using Swashbuckle.Swagger;
 using WebActivatorEx;
 using GD.Links.Xero;
-using System.Linq;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
@@ -141,6 +144,11 @@ namespace GD.Links.Xero
                         // to execute the operation
                         //
                         //c.OperationFilter<AssignOAuth2SecurityRequirements>();
+                        //
+                        // Set filter to eliminate duplicate operation ids from being generated
+                        // when there are multiple operations with the same verb in the API.
+                        //
+                        c.OperationFilter<IncludeParameterNamesInOperationIdFilter>();
 
                         // Post-modify the entire Swagger document by wiring up one or more Document filters.
                         // This gives full control to modify the final SwaggerDocument. You should have a good understanding of
@@ -212,6 +220,25 @@ namespace GD.Links.Xero
                         //
                         //c.EnableOAuth2Support("test-client-id", "test-realm", "Swagger UI");
                     });
+        }
+    }
+
+    internal class IncludeParameterNamesInOperationIdFilter : IOperationFilter
+    {
+        public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
+        {
+            if (operation.parameters != null)
+            {
+                // Select the capitalized parameter names
+                var parameters = operation.parameters.Select(
+                    p => CultureInfo.InvariantCulture.TextInfo.ToTitleCase(p.name));
+
+                // Set the operation id to match the format "OperationByParam1AndParam2"
+                operation.operationId = string.Format(
+                    "{0}By{1}",
+                    operation.operationId,
+                    string.Join("And", parameters));
+            }
         }
     }
 }
