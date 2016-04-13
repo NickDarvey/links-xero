@@ -120,10 +120,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Controllers\Controller.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Controller.txt</LastGenOutput>
-    </Content>
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -138,6 +134,7 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Controllers.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
